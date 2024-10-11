@@ -9,13 +9,13 @@ export function App() {
   useEffect(() => {
     setInterval(() => {
       if (meshRef && meshRef.current) {
-        meshRef.current.rotation.x += 0.02
+        meshRef.current.rotation.x += 0.02;
       }
     }, 100);
   });
 
   return (
-    <div className={"px-4 bg-red-100"}>
+    <div className={'px-4 bg-red-100'}>
       <Canvas>
         <ambientLight intensity={Math.PI / 2} />
         <spotLight
