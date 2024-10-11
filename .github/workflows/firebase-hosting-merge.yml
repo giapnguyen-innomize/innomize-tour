@@ -11,10 +11,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: npm ci && npm run build
+        with:
+          fetch-depth: 0
+
+      - run: npx nx-cloud start-ci-run --distribute-on="3 linux-medium-js" --stop-agents-on-failure
+
+      # Cache node_modules
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - run: yarn install && yarn run build
+
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_INNOMIZE_TOUR }}
           channelId: live
           projectId: innomize-tour
+
+      - run: npx nx-cloud complete-ci-run
