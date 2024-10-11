@@ -43,7 +43,7 @@ Use the plugin's generator to create new projects.
 To generate a new application, use:
 
 ```sh
-npx nx g @nx/react:app demo
+npx nx g @nx/react:App demo
 ```
 
 To generate a new library, use:
