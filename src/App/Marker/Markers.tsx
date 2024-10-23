@@ -1,36 +1,40 @@
-import { useState } from 'react';
-import { Vector3 } from 'three';
+
+
+const MAKERS = [
+[
+  2.3913186685657486,
+  -1,
+  11.02678799806608
+],
+[
+  4.907270086664998,
+  -1,
+  3.9377751948213993
+],
+[
+  -4.629305628815825,
+  -1,
+  10.519685741356458
+]
+]
 
 interface MarkerProps {
   position: [number, number, number];
-  onClick: () => void;
 }
 
-function Marker({ position, onClick }: MarkerProps) {
+function Marker({ position }: MarkerProps) {
   return (
-    <mesh position={position} onClick={onClick}>
+    <mesh position={position} >
       <sphereGeometry args={[0.1, 32, 32]} />
       <meshBasicMaterial color="red" />
     </mesh>
   );
 }
 
-interface MarkersProps {
-  setCameraPosition: (position: [number, number, number]) => void;
-}
 
-export function Markers({ setCameraPosition }: MarkersProps) {
-  const markerPositions: [number, number, number][] = [
-    [1, 1, 1],
-    [-1, 0.5, 2],
-    [0, -1, 3],
-  ];
+export function Markers() {
+  const markerPositions = MAKERS as [number, number, number][];
 
-  const handleMarkerClick = (position: [number, number, number]) => {
-    const offset = new Vector3(0, 0, 2);
-    const newPosition = new Vector3(...position).add(offset);
-    setCameraPosition(newPosition.toArray() as [number, number, number]);
-  };
 
   return (
     <>
@@ -38,7 +42,6 @@ export function Markers({ setCameraPosition }: MarkersProps) {
         <Marker
           key={index}
           position={position}
-          onClick={() => handleMarkerClick(position)}
         />
       ))}
     </>
