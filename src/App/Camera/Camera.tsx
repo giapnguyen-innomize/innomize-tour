@@ -18,7 +18,6 @@ export const Camera = ({ position }: Props) => {
   useEffect(() => {
     cameraAnimationLinear({
       camera: camera as PerspectiveCameraType,
-      controls,
       position,
     });
   }, [camera, controls, scene, position]);
@@ -26,23 +25,19 @@ export const Camera = ({ position }: Props) => {
   useEffect(() => {
     const [x, y, z] = INIT;
     camera.position.set(x, y, z); // Set initial position
-  }, [camera]);
+  }, []);
 
   return <PerspectiveCamera makeDefault fov={40} near={0.2} far={2000} />;
 };
 
 const cameraAnimationLinear = ({
-  duration = 1.2,
+  duration = 2,
   camera,
-  controls,
   position,
-  onComplete = () => null,
 }: {
   duration?: number;
   camera: PerspectiveCameraType;
-  controls: any;
   position: Coord;
-  onComplete?: () => void;
 }) => {
   if (camera && position) {
     const [px, py, pz] = position;
