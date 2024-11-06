@@ -1,7 +1,7 @@
-import { useLoader } from '@react-three/fiber';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { Splat } from '@react-three/drei';
 
 export const Model = () => {
-  const gltf = useLoader(GLTFLoader, '/models/scan.gltf');
-  return <primitive object={gltf.scene} />;
+  return (
+    <Splat src="/models/k11.splat" />
+  );
 };
